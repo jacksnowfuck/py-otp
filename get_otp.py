@@ -2,14 +2,15 @@
 import tkinter as tk
 import pyotp
 
+sec_str = 'XXXXX'
 
-def getOTP(secretstr):
-    return pyotp.TOTP(secretstr).now()
+def getOTP(sec_str):
+    return pyotp.TOTP(sec_str).now()
 
 
 def refreshOTP():
     textotp.delete(0.0, tk.END)
-    textotp.insert(tk.INSERT, r'堡垒机OTP  ' + getOTP('B4T6KFBJHKX3AR5EDV5KABBFHK2UAZKZ'))
+    textotp.insert(tk.INSERT, r'堡垒机OTP  ' + getOTP(sec_str))
     textotp.update()
     windows.after(500, refreshOTP)
 

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
 import pyotp
-import os
 
 sec_str = 'XXXXX'
 
