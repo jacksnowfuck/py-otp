@@ -2,7 +2,7 @@
 import tkinter as tk
 import pyotp
 
-sec_str = 'XXXXX'
+sec_str = 'XXXX'
 
 def getOTP(sec_str):
     return pyotp.TOTP(sec_str).now()
