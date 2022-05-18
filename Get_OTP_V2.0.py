@@ -12,7 +12,6 @@ con = configparser.ConfigParser()
 con.read(file, encoding='utf-8')
 jump_str = con.get('secret','jump_str')
 vpn_str = con.get('secret','vpn_str')
-print(jump_str,vpn_str)
 
 # 根据VPN的secret，生成固定key
 def hotp(counter, secret):
@@ -30,14 +29,14 @@ def totp(secret, timeset):
 
 # 每隔500毫秒，刷新key
 def refreshOTP():
-    textotp.configure(text=r'堡垒机    ' + totp(jump_str, 30) + '\nVPN       ' + totp(vpn_str, 120), font=("Microsoft YaHei", 16))
+    textotp.configure(text=r'堡垒机    ' + totp(jump_str, 30).zfill(6) + '\nVPN       ' + totp(vpn_str, 120).zfill(6), font=("Microsoft YaHei", 16))
     windows.after(500, refreshOTP)
 
 # 设置tk窗口参数
 windows = tk.Tk()
 windows.title('OTP')
 windows.geometry('200x50')
-textotp = tk.Label(windows, text=r'堡垒机    ' + totp(jump_str, 30) + '\nVPN       ' + totp(vpn_str, 120), font=("Microsoft YaHei", 16))
+textotp = tk.Label(windows, text=r'堡垒机    ' + totp(jump_str, 30).zfill(6) + '\nVPN       ' + totp(vpn_str, 120).zfill(6), font=("Microsoft YaHei", 16))
 textotp.pack()
 windows.after(500, refreshOTP)
 windows.mainloop()
