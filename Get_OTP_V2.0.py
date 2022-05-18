@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
+import base64
+import configparser
+import hashlib
+import hmac
+import struct
+import time
 import tkinter as tk
-import hmac, base64, struct, hashlib, time
 
-# 堡垒机和vpn密钥串（时间步长为30和120的)
-jump_str = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-vpn_str = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+file = 'config.ini'
+con = configparser.ConfigParser()
+con.read(file, encoding='utf-8')
+jump_str = con.get('secret','jump_str')
+vpn_str = con.get('secret','vpn_str')
+print(jump_str,vpn_str)
 
 # 根据VPN的secret，生成固定key
 def hotp(counter, secret):
